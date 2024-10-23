@@ -40,17 +40,14 @@ public class MovementBuilder {
     private List<Coordinate> createBaseMovements(Piece piece, int direction) {
         movements = new ArrayList<>();
 
-        int row = piece.getCoordinate().getRow();
-        int column = piece.getCoordinate().getColumn();
-
         int DOUBLE_STEP = 2;
         int LEFT_STEP = -1;
         int RIGHT_STEP = 1;
 
-        movements.add(new Coordinate(row + (DOUBLE_STEP * direction), column));
-        movements.add(new Coordinate(row + (SINGLE_STEP * direction), column));
-        movements.add(new Coordinate(row + (SINGLE_STEP * direction), column + LEFT_STEP));
-        movements.add(new Coordinate(row + (SINGLE_STEP * direction), column + RIGHT_STEP));
+        movements.add(piece.getDisplacedCoordinate(DOUBLE_STEP * direction));
+        movements.add(piece.getDisplacedCoordinate(SINGLE_STEP * direction));
+        movements.add(piece.getDisplacedCoordinate(SINGLE_STEP * direction, LEFT_STEP));
+        movements.add(piece.getDisplacedCoordinate(SINGLE_STEP * direction, RIGHT_STEP));
 
         return movements;
     }

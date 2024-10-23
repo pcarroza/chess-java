@@ -17,10 +17,6 @@ public class EventMoveBishop extends EventMove {
     @Override
     public void loadPieceMoves() {
     }
-
-    @Override
-    public void accept(VisitorEventMove visitorEventMove) {
-    }
 }
 
 

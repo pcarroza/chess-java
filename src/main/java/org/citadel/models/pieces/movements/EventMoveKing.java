@@ -18,8 +18,4 @@ public class EventMoveKing extends EventMove {
     @Override
     public void loadPieceMoves() {
     }
-
-    @Override
-    public void accept(VisitorEventMove visitorEventMove) {
-    }
 }

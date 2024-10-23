@@ -31,6 +31,14 @@ public class Coordinate implements Cloneable {
         return false;
     }
 
+    public Coordinate displaced(int row, int column) {
+        return new Coordinate(getRow() + row, getColumn() + column);
+    }
+
+    public Coordinate displaced(int row) {
+        return new Coordinate(getRow() + row, getColumn());
+    }
+
     @Override
     public int hashCode() {
         return super.hashCode();

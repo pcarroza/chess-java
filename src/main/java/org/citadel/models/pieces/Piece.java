@@ -2,6 +2,7 @@ package org.citadel.models.pieces;
 
 import org.citadel.models.Board;
 import org.citadel.models.Coordinate;
+import org.citadel.models.Player;
 import org.citadel.models.pieces.movements.EventMove;
 
 public abstract class Piece implements Cloneable {
@@ -12,8 +13,14 @@ public abstract class Piece implements Cloneable {
 
     protected Board board;
 
+    protected Player color;
+
     public Piece(Coordinate coordinate) {
         position = coordinate;
+    }
+
+    public void setColor(Player player) {
+        color = player;
     }
 
     public void setBoard(Board board) {
@@ -26,6 +33,14 @@ public abstract class Piece implements Cloneable {
 
     public Coordinate getCoordinate() {
         return position;
+    }
+
+    public Coordinate getDisplacedCoordinate(int row, int column) {
+        return getCoordinate().displaced(row, column);
+    }
+
+    public Coordinate getDisplacedCoordinate(int row) {
+        return getCoordinate().displaced(row);
     }
 
     public boolean isPresent(Coordinate coordinate) {
@@ -42,11 +57,11 @@ public abstract class Piece implements Cloneable {
     }
 
     public boolean isWhite() {
-        return board.isWhite();
+        return color == Player.WHITE;
     }
 
     public boolean isBlack() {
-        return board.isBlack();
+        return color == Player.BLACK;
     }
 
     public boolean isDiagonal(Coordinate coordinate) {

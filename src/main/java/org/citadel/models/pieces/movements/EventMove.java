@@ -18,6 +18,4 @@ public abstract class EventMove {
     public abstract boolean isMovementValid(Coordinate coordinate);
 
     public abstract void loadPieceMoves();
-
-    public abstract void accept(VisitorEventMove visitorEventMove);
 }

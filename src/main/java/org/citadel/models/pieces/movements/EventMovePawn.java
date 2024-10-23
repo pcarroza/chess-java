@@ -25,9 +25,4 @@ public class EventMovePawn extends EventMove {
             assert false;
         }
     }
-
-    @Override
-    public void accept(VisitorEventMove visitorEventMove) {
-        visitorEventMove.visit(this);
-    }
 }

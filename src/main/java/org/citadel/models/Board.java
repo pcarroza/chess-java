@@ -30,7 +30,11 @@ public class Board extends Subject {
 
     public Board() {
         flatMap = Map.of(BLACK, getPiecesBlack(), WHITE, getPiecesWhite());
-        flatMap.values().forEach(pieces -> pieces.forEach(piece -> piece.setBoard(this)));
+        for (List<Piece> pieces : flatMap.values()) {
+            pieces.forEach(piece -> piece.setBoard(this));
+        }
+        getPiecesWhite().forEach(piece -> piece.setColor(WHITE));
+        getPiecesBlack().forEach(piece -> piece.setColor(BLACK));
         turn = new Turn();
         deletedPiecesMap = Map.of(BLACK, new ArrayList<>(), WHITE, new ArrayList<>());
     }
@@ -99,14 +103,6 @@ public class Board extends Subject {
 
     private boolean isBlack(Coordinate coordinate) {
         return flatMap.get(BLACK).stream().anyMatch(piece -> piece.isPresent(coordinate));
-    }
-
-    public boolean isWhite() {
-        return getCurrentPlayer().equals(WHITE);
-    }
-
-    public boolean isBlack() {
-        return getCurrentPlayer().equals(BLACK);
     }
 
     public boolean isMovementValid(Coordinate coordinate) {
