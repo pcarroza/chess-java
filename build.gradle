@@ -1,0 +1,21 @@
+plugins {
+    id 'java'
+}
+
+group = 'org.citadel'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'junit:junit:4.13.1'
+    testImplementation "org.mockito:mockito-core:3.+"
+}
+
+test {
+    useJUnitPlatform()
+    useJUnit()
+    testLogging.showStandardStreams = true
+}
