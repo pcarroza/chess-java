@@ -3,9 +3,9 @@ package org.citadel.models;
 import org.citadel.common.tools.ClosedInterval;
 import org.citadel.models.pieces.Piece;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
+import java.util.List;
+import java.util.ArrayList;
 
 import static org.citadel.common.tools.BoardConstants.HEIGHT;
 import static org.citadel.common.tools.BoardConstants.WIDTH;
@@ -85,14 +85,6 @@ public class Board extends Subject {
         turn.change();
     }
 
-    public boolean isWhite() {
-        return getCurrentPlayer().equals(WHITE);
-    }
-
-    public boolean isBlack() {
-        return getCurrentPlayer().equals(BLACK);
-    }
-
     public boolean isTheWhitePieceSelected(Coordinate coordinate) {
         return !isEmpty(coordinate) && isWhite(coordinate);
     }
@@ -107,6 +99,14 @@ public class Board extends Subject {
 
     private boolean isBlack(Coordinate coordinate) {
         return flatMap.get(BLACK).stream().anyMatch(piece -> piece.isPresent(coordinate));
+    }
+
+    public boolean isWhite() {
+        return getCurrentPlayer().equals(WHITE);
+    }
+
+    public boolean isBlack() {
+        return getCurrentPlayer().equals(BLACK);
     }
 
     public boolean isMovementValid(Coordinate coordinate) {
