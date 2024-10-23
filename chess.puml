@@ -1,0 +1,122 @@
+@startuml
+
+class Game  {
+
+  -board: Board
+  
+  +Game()
+  +put(coordinate: Coordinate): void
+  +move(coordinate: Coordinate): void
+  +select(coordinate: Coordinate): Piece
+  +isEmpty(coordinate: Coordinate): bool
+  +initialize(): void
+  +finalize(): void
+  +exit(): void
+  +end(): void
+}
+
+class Board {
+
+  -flat: Map<Color, Set<Piece>>
+  -deletedPiece: Map<Color, Set<Piece>>
+  -selectedPiece: Piece
+  -turn: Turn
+  -LIMITS = new ClosedInterval<Integer>(8, 8)
+  
+  +Game()
+  +put(coordinate: coordinate): void
+  +move(coordinate: Coordinate): void
+  +select(coordinate: coordinate): Piece
+  +isEmpty(coordinate: coordinate): bool
+  +initialize(): void
+  +finalize(): void
+  +exit(): void
+  +end(): void
+}
+
+enum Color {
+  BLACK
+  WHITE
+}
+
+class Piece {
+  -coordinate: Coordinate
+  -board: Board
+  -eventMove: EventMove
+
+  +Piece()
+  +put(coordinate: Coordinate): void
+  +ifPresent(coordinate: Coordinate): bool
+  +setBoard(Board board): void
+  +setCoordinate(Coordinate coordinate): void
+  +getCoordinate(): Coordinate
+  +isPresent(Coordinate coordinate): bool
+  +isMovementValid(Coordinate coordinate): bool
+  +put(Coordinate coordinate): void
+  #clone(): Piece
+}
+
+class Turn {
+  -value: int = 0
+
+  +Turn()
+  +change()
+  +getPlayer()
+  +clone(): Turn
+}
+
+class common.tools.ClosedInterval{
+  
+  -max: int
+  -min: int
+  
+  +ClosedInterval(min: int, max: int)
+  +isIncluded(value: int): bool
+}
+
+class Town {
+}
+
+class Coordinate {
+  -row: int
+  -column: int
+  
+  +Coordinate(row: int, column: int)
+}
+
+Game *--> Board
+Game .> Coordinate
+Game *--> Turn
+Game .right.> Color
+Board *--> Piece
+Board ..> Coordinate
+Board ..> Color
+Board *-right-> ClosedInterval
+Turn ..> Color
+Piece <|-- Town
+Piece <|-- Bishop
+Piece <|-- King
+Piece <|-- Pawn
+Piece <|-- Rook
+Piece <|-- Queen
+Piece --> Board
+Piece --> Coordinate
+Piece *--> EventMove
+
+Town ..> Coordinate
+Bishop ..> Coordinate
+King ..> Coordinate
+Pawn ..> Coordinate
+Rook ..> Coordinate
+Queen ..> Coordinate
+
+EventMove <|-- PawnMove
+EventMove <|-- RookMove
+EventMove <|-- BishopMove
+EventMove <|-- QueenMove
+EventMove <|-- KingMove
+EventMove <|-- KnightMove
+
+@enduml
+
+
